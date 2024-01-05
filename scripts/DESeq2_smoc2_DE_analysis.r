@@ -17,26 +17,6 @@ smoc2_metadata <- read.csv('smoc2_metadata.csv', header = TRUE, row.names = 1)
 head(smoc2_rawcounts)
 str(smoc2_rawcounts)
 
-# # ------------------------------------
-# # Metadata table for smoc2_rawcounts
-# # ------------------------------------
-
-# # Create genotype vector
-# genotype <- c('smoc2_oe', 'smoc2_oe', 'smoc2_oe', 'smoc2_oe', 'smoc2_oe', 'smoc2_oe', 'smoc2_oe')
-
-# # Create condition vector
-# condition <- c('fibrosis', 'fibrosis', 'fibrosis', 'fibrosis', 'normal', 'normal', 'normal')
-
-# # Create the metadata data frame
-# smoc2_metadata <- data.frame(genotype, condition)
-
-# # ------------------------------------
-# # Data hamonization for DESeq2
-# # ------------------------------------
-
-# # Assign the row names of the metadata data frame
-# rownames(smoc2_metadata) <- c('smoc2_fibrosis1', 'smoc2_fibrosis2', 'smoc2_fibrosis3', 'smoc2_fibrosis4', 'smoc2_normal1', 'smoc2_normal3', 'smoc2_normal4')
-
 # Use the match() function to reorder the columns of the raw counts
 reorder_idx <- match(rownames(smoc2_metadata), colnames(smoc2_rawcounts))
 
@@ -91,9 +71,6 @@ plotDispEsts(dds_all)
 # Gene dispersion looks normal
 
 # Extract the results of the differential expression analysis
-# res_all <- results(dds_all, 
-#                 condition = 'fibrosis', 
-#                 alpha = 0.05)
 
 res_all <- results(dds_all, 
                    contrast = c("condition", "fibrosis", "normal"),
@@ -101,9 +78,6 @@ res_all <- results(dds_all,
 
 
 # Shrink the log2 fold change estimates to be more accurate
-# res_all <- lfcShrink(dds_all, 
-#                     contrast =  c('condition', 'fibrosis', 'normal'),
-#                     res = dds_all)
 
 res_all_shrunken <- lfcShrink(dds_all, 
                               contrast = c('condition', 'fibrosis', 'normal'),
