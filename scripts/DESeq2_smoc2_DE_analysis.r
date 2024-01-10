@@ -25,7 +25,7 @@ reordered_smoc2_rawcounts <- smoc2_rawcounts[, reorder_idx]
 
 # ------------------------------------
 # DESEq2 QC and Analysis
-# ----------------------------------
+# ------------------------------------
 
 # Create a DESeq2 object to test for the effects of fibrosis regardless of genotype
 dds_all <- DESeqDataSetFromMatrix(countData = smoc2_rawcounts,
